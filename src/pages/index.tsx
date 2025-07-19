@@ -1,13 +1,13 @@
-import dynamic from 'next/dynamic';
-
-const GlobeScene = dynamic(() => import('@/components/GlobeScene'), {
-  ssr: false,
-});
+import Header from '@/components/Header';
+import GlobeScene from '@/components/GlobeScene';
 
 export default function Home() {
   return (
-    <main className="w-screen h-screen">
-      <GlobeScene />
+    <main className="w-screen h-screen overflow-hidden flex flex-col">
+      <Header />
+      <div className="flex-1">
+        <GlobeScene />
+      </div>
     </main>
   );
 }
