@@ -6,11 +6,11 @@ export default function Legend() {
   ];
 
   return (
-    <div className="absolute bottom-4 left-4 bg-white p-4 rounded shadow-md z-10">
+    <div className="absolute bottom-4 left-4 bg-white p-4 text-black rounded shadow-md z-10">
       <h2 className="font-bold mb-2">Legend</h2>
       <ul>
         {legendItems.map((item) => (
-          <li key={item.label} className="flex items-center gap-2">
+          <li key={item.label} className="flex items-center text-black gap-2">
             <span
               className="w-4 h-4 rounded-full inline-block"
               style={{ backgroundColor: item.color }}
