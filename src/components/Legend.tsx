@@ -1,4 +1,3 @@
-// src/components/Legend.tsx
 import React from "react";
 
 type LegendItem = {
