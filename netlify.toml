@@ -1,0 +1,12 @@
+[functions]
+  node_bundler = "esbuild"
+
+[build]
+  publish = "out"  # or ".next" if you're not exporting statically
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+  [plugins.inputs]
+    enable_blobs = false

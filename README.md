@@ -16,18 +16,27 @@ This project is a web-based application that visualizes real-time or historical 
 - ⚡ Data fetched from an external API (live or mock)
 
 ---
+| Library                                         | Description                                                              |
+| ----------------------------------------------- | ------------------------------------------------------------------------ |
+| **React**                                       | JavaScript library for building user interfaces                          |
+| **TypeScript**                                  | Static type-checker for more robust code                                 |
+| **Vite**                                        | Fast build tool and development server                                   |
+| **Three.js**                                    | 3D graphics library for rendering the globe                              |
+| **react-globe.gl**                              | React wrapper for `three-globe`, used to create the interactive 3D globe |
+| **Tailwind CSS**                                | Utility-first CSS framework for fast UI styling                          |
+| **d3-geo**                                      | Used under the hood by `react-globe.gl` for map projections              |
+| **React Hooks** (`useEffect`, `useState`, etc.) | For managing component state and lifecycle                               |
+| **ESLint + Prettier** *(optional)*              | For maintaining code quality and formatting                              |
+
 
 ## 🚀 Getting Started
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/latency-globe.git
-cd latency-globe
+cd latency-visualizer
 2. Install dependencies
-bash
-Copy
-Edit
+
 npm install
 # or
 yarn install
