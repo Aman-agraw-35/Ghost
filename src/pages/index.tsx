@@ -9,7 +9,7 @@ export default function Home() {
   
 
       {/* Globe Section */}
-      <section className="w-full h-screen">
+      <section className="w-full h-[87vh] ">
         <GlobeScene />
       </section>
           {/* Latency Chart Section */}
