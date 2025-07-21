@@ -1,13 +1,22 @@
 import Header from '@/components/Header';
 import GlobeScene from '@/components/GlobeScene';
+import LatencyChart from '@/components/LatencyChart';
 
 export default function Home() {
   return (
-    <main className="w-screen h-screen overflow-hidden flex flex-col">
+    <main className="w-screen min-h-screen bg-black text-white overflow-y-auto flex flex-col">
       <Header />
-      <div className="flex-1">
+  
+
+      {/* Globe Section */}
+      <section className="w-full h-screen">
         <GlobeScene />
-      </div>
+      </section>
+          {/* Latency Chart Section */}
+      <section className="w-full h-screen z-5 bg-[#111] border-t border-gray-700 p-4 flex flex-col">
+        <h2 className="text-xl font-semibold mb-2">Global Latency (Last 4 Days)</h2>
+        <LatencyChart />
+      </section>
     </main>
   );
 }
