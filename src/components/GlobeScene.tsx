@@ -15,7 +15,14 @@ type ArcData = {
   endLng: number;
   color: string;
   latency: number;
+  timestamp?: string | null;
 };
+
+// ✅ Moved outside so it doesn't recreate on every render
+const Globe = dynamic(() => import("react-globe.gl"), {
+  ssr: false,
+  loading: () => <Loader />,
+});
 
 export default function GlobeScene() {
   const globeRef = useRef<GlobeMethods | undefined>(undefined);
@@ -26,6 +33,7 @@ export default function GlobeScene() {
   const [selectedLatencyRange, setSelectedLatencyRange] = useState("");
   const [showRealTime, setShowRealTime] = useState(true);
 
+  // ✅ Handle resize
   useEffect(() => {
     const updateSize = () => {
       setDimensions({ width: window.innerWidth, height: window.innerHeight });
@@ -35,11 +43,7 @@ export default function GlobeScene() {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const Globe = dynamic(() => import("react-globe.gl"), {
-    ssr: false,
-    loading: () => <Loader />,
-  });
-
+  // ✅ Fetch latency and only update if changed
   useEffect(() => {
     const fetchLatency = async () => {
       try {
@@ -58,7 +62,7 @@ export default function GlobeScene() {
 
         const latencies = serie_0.p50;
 
-        const arcs = latencies.map((value: string, i: number) => {
+        const arcs: ArcData[] = latencies.map((value: string, i: number) => {
           const latency = parseFloat(value);
           const color =
             latency < 20
@@ -82,7 +86,14 @@ export default function GlobeScene() {
           };
         });
 
-        setLatencyArcs(arcs.slice(-100));
+        const latest = arcs.slice(-100);
+
+        // ✅ Prevent re-render if arcs haven't changed
+        setLatencyArcs((prev) => {
+          const prevStr = JSON.stringify(prev);
+          const newStr = JSON.stringify(latest);
+          return prevStr === newStr ? prev : latest;
+        });
       } catch (err) {
         console.error("Frontend fetch error:", err);
       }
@@ -93,6 +104,7 @@ export default function GlobeScene() {
     return () => clearInterval(interval);
   }, []);
 
+  // ✅ Auto rotate POV
   useEffect(() => {
     const interval = setInterval(() => {
       if (globeRef.current?.pointOfView) {
